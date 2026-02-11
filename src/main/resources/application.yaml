@@ -3,9 +3,9 @@ spring:
     name: startahb-leave-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/startahb_leave_db
-    username: root
-    password: root
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -15,7 +15,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        # dialect removed (auto-detected in Hibernate 6+)
 
   sql:
     init:
@@ -29,13 +29,13 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka/ # to register this service with service registry..
+      defaultZone: http://localhost:8761/eureka/
 
 logging:
   level:
     org.hibernate.SQL: DEBUG
 
 jwt:
-  secretKey: XQE8EqXc/LmVzh61R4HcGgCR5SpkoYMpBLSHIbrZl2Q=
-  expirationMs: 3600000
-  refreshExpirationMs: 86400000
+  secretKey: ${JWT_SECRET}
+  expirationMs: ${JWT_EXPIRATION}
+  refreshExpirationMs: ${JWT_REFRESH_EXPIRATION}
